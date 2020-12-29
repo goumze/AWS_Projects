@@ -31,6 +31,9 @@ public class CreateS3Bucket {
 
         S3Client s3Client = S3Client
                 .builder()
+                /**More specific settings when choosing for credentials provider
+                 * https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
+                 */
                 .credentialsProvider(DefaultCredentialsProvider.create())
                 .region(Region.AP_SOUTH_1)
                 .build();
