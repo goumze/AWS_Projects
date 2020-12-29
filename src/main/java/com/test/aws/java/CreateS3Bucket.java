@@ -2,8 +2,13 @@ package com.test.aws.java;
 
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
+import software.amazon.awssdk.services.s3.model.GetBucketLocationRequest;
+import software.amazon.awssdk.services.s3.model.GetBucketLocationResponse;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
 public class CreateS3Bucket {
     public static void main(String... args) {
@@ -27,10 +32,36 @@ public class CreateS3Bucket {
         S3Client s3Client = S3Client
                 .builder()
                 .credentialsProvider(DefaultCredentialsProvider.create())
-                .region(Region.AF_SOUTH_1)
+                .region(Region.AP_SOUTH_1)
                 .build();
 
-        if (!s3Client.listBuckets().buckets().stream().anyMatch(index -> index.name().equals(bucketName))) {
+        /**
+         * This method doesBucketExistV2("") is not present in latest v2 sdk.
+         * if(!s3Client.doesBucketExistV2(bucketName))
+         */
+        if (s3Client.listBuckets().buckets().stream().anyMatch(index -> index.name().equals(bucketName))) {
+            throw S3Exception.create("Bucket Exists",null);
+        }else{
+            System.out.println("This is a new bucket");
+
+            CreateBucketRequest bucketRequest = CreateBucketRequest
+                    .builder()
+                    .bucket(bucketName)
+                    .build();
+
+            //Here bucket is created
+            /**
+             * In SDK v1, CreateBucketRequest used could be instantiated using new but now it's final in v2.
+             *s3Client.createBucket(new CreateBucketRequest(bucketName));
+             */
+
+            s3Client.createBucket(bucketRequest);
+
+            //Verifying bucket location
+            GetBucketLocationRequest getBucketLocationRequest = GetBucketLocationRequest.builder().bucket(bucketName).build();
+            GetBucketLocationResponse s3BucketLocation = s3Client.getBucketLocation(getBucketLocationRequest);
+            System.out.println("Bucket location is: "+s3BucketLocation.toString());
         }
     }
+
 }
