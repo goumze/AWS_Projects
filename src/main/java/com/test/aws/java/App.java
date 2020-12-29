@@ -1,5 +1,6 @@
 package com.test.aws.java;
 
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -11,7 +12,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         Region region = Region.AP_SOUTH_1;
         //Region.US_WEST_2;
-        S3Client s3 = S3Client.builder().region(region).build();
+        S3Client s3 = S3Client.builder().credentialsProvider(ProfileCredentialsProvider.create()).region(region).build();
         String bucket = "bucket" + System.currentTimeMillis();
         String key = "key";
         tutorialSetup(s3, bucket, region);
