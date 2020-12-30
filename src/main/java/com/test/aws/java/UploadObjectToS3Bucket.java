@@ -6,9 +6,6 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-import java.io.File;
-import java.util.HashMap;
-
 public class UploadObjectToS3Bucket {
     public static void main(String...args){
 
@@ -26,7 +23,11 @@ public class UploadObjectToS3Bucket {
 
         System.out.println("Bucket Name is: "+bucketName);
 
-        PutObjectRequest putObjectRequest = PutObjectRequest.builder().bucket(bucketName).key(testStringDataKey).build();
+        PutObjectRequest putObjectRequest = PutObjectRequest
+                .builder()
+                .bucket(bucketName)
+                .key(testStringDataKey)
+                .build();
 
         // Put Object
         /**
