@@ -1,4 +1,4 @@
-package com.test.aws.java;
+package com.test.aws.ch3.s3;
 
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;

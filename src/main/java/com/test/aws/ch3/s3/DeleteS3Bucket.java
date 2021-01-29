@@ -1,11 +1,9 @@
-package com.test.aws.java;
+package com.test.aws.ch3.s3;
 
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
-
-import java.util.List;
 
 public class DeleteS3Bucket {
 
