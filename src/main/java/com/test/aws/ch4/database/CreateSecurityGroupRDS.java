@@ -20,10 +20,10 @@ public class CreateSecurityGroupRDS {
                 .build();
 
 
-        String groupName = "rds-sg-dev-demo";
-        //String groupDesc = "RDS Security Group for AWS Dev Study Guide";
-        //System.out.println("Please enter the vpc id");
-        //String vpcId = new Scanner(System.in).next();
+        String groupName = "rds-sg-dev-demo-3";
+        String groupDesc = "RDS Security Group for AWS Dev Study Guide";
+        System.out.println("Please enter the vpc id");
+        String vpcId = new Scanner(System.in).next();
 
         //List out available security groups
         DescribeSecurityGroupsRequest describeSecurityGroupsRequest =
@@ -46,39 +46,42 @@ public class CreateSecurityGroupRDS {
                         index.description()));
 
         //Define IP Range
-        /*IpRange ipRange = IpRange
+        IpRange ipRange = IpRange
                 .builder()
                 .cidrIp("0.0.0.0/0")
-                .build();*/
+                .build();
 
         //Define IP Permissions
-        /*IpPermission ipPermission = IpPermission
+        IpPermission ipPermission = IpPermission
                 .builder()
                 .ipProtocol("tcp")
                 .toPort(3306)
                 .fromPort(3306)
                 .ipRanges(ipRange)
-                .build();*/
+                .build();
 
 
         //Authorize Security Group request from the ip address
 
-        /*AuthorizeSecurityGroupIngressRequest authorizeSecurityGroupIngressRequest
+        AuthorizeSecurityGroupIngressRequest authorizeSecurityGroupIngressRequest
                 = AuthorizeSecurityGroupIngressRequest
                 .builder()
                 .groupName(groupName)
                 .ipPermissions(ipPermission)
-                .build();*/
+                .build();
 
 
-        /*CreateSecurityGroupRequest createSecurityGroupRequest =
+        CreateSecurityGroupRequest createSecurityGroupRequest =
                 CreateSecurityGroupRequest
                         .builder()
                         .groupName(groupName)
                         .description(groupDesc)
                         .vpcId(vpcId)
-                        .build();*/
+                        .build();
 
-        //CreateSecurityGroupResponse resp= ec2Client.createSecurityGroup(createSecurityGroupRequest);
+        CreateSecurityGroupResponse createSecurityGroupResponse= ec2Client.createSecurityGroup(createSecurityGroupRequest);
+
+        System.out.println("Response after security group creation");
+        System.out.println(createSecurityGroupResponse);
     }
 }
