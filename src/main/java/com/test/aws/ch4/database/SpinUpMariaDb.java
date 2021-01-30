@@ -19,7 +19,7 @@ public class SpinUpMariaDb {
     public static void main(String...args) throws IOException {
 
         String sg_name = "rds-sg-dev-demo-3";
-        String rds_identifier = "my-rds-db-2";
+        String rds_identifier = "my-rds-db-"+System.currentTimeMillis();
         String db_name = "mytestdb";
 
         String user_name = "masteruser";
