@@ -48,6 +48,7 @@ public class ConnectToRDS {
     /**
      * Based on
      * https://aws.amazon.com/blogs/database/using-the-mariadb-jdbc-driver-with-amazon-aurora-with-mysql-compatibility/
+     * https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Connecting.Java.html
      */
     public static void connectToDb(DBInstance dbInstance){
 
