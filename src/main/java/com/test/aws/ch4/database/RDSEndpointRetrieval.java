@@ -2,8 +2,11 @@ package com.test.aws.ch4.database;
 
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rds.RdsClient;
+import software.amazon.awssdk.services.rds.model.DBInstance;
+import software.amazon.awssdk.services.rds.model.DbInstanceAlreadyExistsException;
 import software.amazon.awssdk.services.rds.model.DescribeDbInstancesRequest;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class RDSEndpointRetrieval {
@@ -23,7 +26,7 @@ public class RDSEndpointRetrieval {
         //Describe request for Rds instance identifier
         DescribeDbInstancesRequest describeDbInstancesRequest = DescribeDbInstancesRequest
                 .builder()
-                .dbInstanceIdentifier("my-rds-db-1612031535471")
+                .dbInstanceIdentifier("my-rds-db-1612150565532")
                 .build();
 
         //Create Rds client instance
@@ -46,5 +49,10 @@ public class RDSEndpointRetrieval {
                     .forEach(System.out::println);
         }
 
+    }
+
+    public static List<DBInstance> getdbInstance(RdsClient rdsClient, DescribeDbInstancesRequest describeDbInstancesRequest) {
+            //A more specific way of retrieving the db instances from the account
+            return rdsClient.describeDBInstances(describeDbInstancesRequest).dbInstances();
     }
 }
