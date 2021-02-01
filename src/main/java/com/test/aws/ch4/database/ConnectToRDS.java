@@ -45,6 +45,10 @@ public class ConnectToRDS {
         connectToDb(dbInstanceList.get(0));
     }
 
+    /**
+     * Based on
+     * https://aws.amazon.com/blogs/database/using-the-mariadb-jdbc-driver-with-amazon-aurora-with-mysql-compatibility/
+     */
     public static void connectToDb(DBInstance dbInstance){
 
         String sg_name = "rds-sg-dev-demo-3";
