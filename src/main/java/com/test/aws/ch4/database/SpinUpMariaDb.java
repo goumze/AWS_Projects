@@ -92,6 +92,7 @@ public class SpinUpMariaDb {
                 .vpcSecurityGroupIds(sg_grp_id)
                 .allocatedStorage(20)
                 .tags(rdsTags)
+                .publiclyAccessible(Boolean.TRUE)
                 .build();
 
         //Initiating request

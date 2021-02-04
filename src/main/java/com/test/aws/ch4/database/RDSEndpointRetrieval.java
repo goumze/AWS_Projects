@@ -26,7 +26,7 @@ public class RDSEndpointRetrieval {
         //Describe request for Rds instance identifier
         DescribeDbInstancesRequest describeDbInstancesRequest = DescribeDbInstancesRequest
                 .builder()
-                .dbInstanceIdentifier("my-rds-db-1612150565532")
+                .dbInstanceIdentifier("my-rds-db-1612449667562")
                 .build();
 
         //Create Rds client instance
