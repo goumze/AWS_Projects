@@ -6,10 +6,9 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 import software.amazon.awssdk.services.dynamodb.waiters.DynamoDbWaiter;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+//https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/examples-dynamodb-tables.html
 public class SpinUpDynamoDb {
 
     public static void main(String...args) {
