@@ -14,7 +14,6 @@ import static com.test.aws.ch4.database.DynamoDbListAllTables.listTablesResponse
 public class DynamoDbUpdateRecord {
 
     public static void main(String...args){
-
         System.out.println("Set the region");
         String regionName = new Scanner(System.in).next();
 
@@ -38,34 +37,30 @@ public class DynamoDbUpdateRecord {
         DescribeTableResponse describeTableResponse = describeDynamoDbTable(dynamoDbClient, listTableNamesResponseList.stream().filter(index->index.equals("JavaUsers")).findFirst().get());
         String first_attribute = describeTableResponse.table().attributeDefinitions().stream().findFirst().get().attributeName();
 
-        putItemInTable(dynamoDbClient,describeTableResponse.table().tableName(),first_attribute,String.valueOf(System.currentTimeMillis()));
+        //Update record
+        updateTableItem(dynamoDbClient,describeTableResponse.table().tableName(),first_attribute,"1612500574100");
     }
 
-    public static void putItemInTable(DynamoDbClient dynamoDbClient,String tableName,String key,String keyVal){
+    public static void updateTableItem(DynamoDbClient dynamoDbClient, String tableName, String key, String keyVal){
 
-        // Add all content to the table
-        HashMap<String, AttributeValue> itemValues = new HashMap<String,AttributeValue>();
-        itemValues.put(key, AttributeValue.builder().s(keyVal).build());
+        HashMap<String,AttributeValue> itemKey = new HashMap<>();
+        itemKey.put(key, AttributeValue.builder().s(keyVal).build());
 
-        //Create put item request for the table
-        PutItemRequest request = PutItemRequest
+        HashMap<String, AttributeValueUpdate> updatedValues = new HashMap<>();
+
+        // Update the column specified by name with updatedVal
+        updatedValues.put(key, AttributeValueUpdate.builder()
+                .value(AttributeValue.builder().s("Hello Test").build())
+                .action(AttributeAction.PUT)
+                .build());
+
+        UpdateItemRequest updateItemRequest = UpdateItemRequest
                 .builder()
                 .tableName(tableName)
-                .item(itemValues)
+                .key(itemKey)
+                .attributeUpdates(updatedValues)
                 .build();
 
-        try {
-            dynamoDbClient.putItem(request);
-            System.out.println(tableName +" was successfully updated");
-
-        } catch (ResourceNotFoundException e) {
-            System.err.format("Error: The Amazon DynamoDB table \"%s\" can't be found.\n", tableName);
-            System.err.println("Be sure that it exists and that you've typed its name correctly!");
-            System.exit(1);
-        } catch (DynamoDbException e) {
-            System.err.println(e.getMessage());
-            System.exit(1);
-        }
-
+        dynamoDbClient.updateItem(updateItemRequest);
     }
 }
