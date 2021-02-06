@@ -9,7 +9,7 @@ import software.amazon.awssdk.services.dynamodb.waiters.DynamoDbWaiter;
 import java.util.Scanner;
 
 //https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/examples-dynamodb-tables.html
-public class SpinUpDynamoDb {
+public class DynamoDbSpinUp {
 
     public static void main(String...args) {
 
