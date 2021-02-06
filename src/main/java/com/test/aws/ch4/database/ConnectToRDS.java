@@ -8,7 +8,6 @@ import software.amazon.awssdk.services.rds.model.DescribeDbInstancesRequest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class ConnectToRDS {
         //Describe request for Rds instance identifier
         DescribeDbInstancesRequest describeDbInstancesRequest = DescribeDbInstancesRequest
                 .builder()
-                .dbInstanceIdentifier("my-rds-db-1612449667562")
+                //.dbInstanceIdentifier("my-rds-db-1612449667562")
                 .build();
 
         //Create Rds client instance
@@ -53,15 +52,16 @@ public class ConnectToRDS {
      * https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-rds.html
      */
     public static void connectToDb(DBInstance dbInstance) throws ClassNotFoundException, SQLException {
-        Class.forName("org.mariadb.jdbc.Driver");
+        //Class.forName("org.mariadb.jdbc.Driver");
         String dbName = "mytestdb";
-        String userName = "masteruser";
+        String userName = "orcl";
         String password = "mymasterpassw0rd1!";
         String hostname = dbInstance.endpoint().address();
         String port = String.valueOf(dbInstance.endpoint().port());
 
-        String jdbcUrl = "jdbc:mariadb://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
-        Connection con = DriverManager.getConnection(jdbcUrl);
+        String jdbcUrl = "jdbc:oracle:thin:@" + hostname + ":" + port + ":"+dbInstance.dbName().toLowerCase();
+        Connection con = DriverManager.getConnection(jdbcUrl,"admin",password);
+        //con.close();
         System.out.println("Connected successfully to database...");
 
     }
