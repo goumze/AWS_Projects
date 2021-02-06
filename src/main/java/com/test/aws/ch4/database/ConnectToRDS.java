@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import static com.test.aws.ch4.database.RDSEndpointRetrieval.getdbInstance;
 
+//https://www.youtube.com/watch?v=HfukksuHU6Q&t=425s
 public class ConnectToRDS {
 
     public static void main(String...args) throws SQLException, ClassNotFoundException {
