@@ -12,7 +12,8 @@ Globals:
 
 Resources:
   AwsServerlessFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
+    # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: target/AwsServerlessApi-1.0.jar
       Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
@@ -20,7 +21,8 @@ Resources:
       MemorySize: 1024
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 300
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+      Environment:
+        # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PARAM1: VALUE
       Events:
