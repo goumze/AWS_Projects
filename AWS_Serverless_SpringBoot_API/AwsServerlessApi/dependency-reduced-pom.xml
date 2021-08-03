@@ -43,6 +43,26 @@
           </dependency>
         </dependencies>
       </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>zip-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>${project.artifactId}-${project.version}</finalName>
+              <descriptors>
+                <descriptor>src${file.separator}assembly${file.separator}bin.xml</descriptor>
+              </descriptors>
+              <attach>false</attach>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <repositories>
