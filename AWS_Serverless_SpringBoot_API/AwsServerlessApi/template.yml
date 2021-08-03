@@ -11,7 +11,7 @@ Globals:
     Timeout: 20
 
 Resources:
-  HelloWorldFunction:
+  AwsServerlessFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: target/AwsServerlessApi-1.0.jar
@@ -31,8 +31,8 @@ Resources:
             Method: any
 
       #Outputs:
-      # SpringLambdaServerlessApiApi:
-      #  Description: URL for application
-      # Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+       #AwsServerlessApi:
+        #Description: URL for application
+        #Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
       #Export:
-      # Name: SpringLambdaServerlessApiApi
+       #Name: SpringLambdaServerlessApiApi
